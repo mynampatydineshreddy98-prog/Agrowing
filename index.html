@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AgroWing | Book Agri-Drones for Spraying</title>
+  <style>
+    :root {
+      --primary: #1b7a3d;
+      --primary-dark: #13592c;
+      --accent: #f59e0b;
+      --bg: #f3f7f4;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #cbd5e1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding-bottom: 40px;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      color: white;
+      padding: 20px 16px 28px;
+      text-align: center;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    header h1 {
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      font-size: 0.92rem;
+      opacity: 0.92;
+      margin-top: 4px;
+    }
+
+    /* Value Strip */
+    .stats-bar {
+      display: flex;
+      justify-content: space-around;
+      background: var(--card);
+      margin: -18px 16px 18px;
+      padding: 12px 8px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+      text-align: center;
+    }
+
+    .stat-item strong {
+      display: block;
+      color: var(--primary);
+      font-size: 1rem;
+    }
+
+    .stat-item span {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* Container */
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* Role Switcher Tabs */
+    .tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: #e2e8f0;
+      padding: 5px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .tab-btn {
+      border: none;
+      padding: 12px 8px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      background: transparent;
+      color: var(--muted);
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--card);
+      color: var(--primary-dark);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Form Card */
+    .card {
+      background: var(--card);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+      color: var(--primary-dark);
+    }
+
+    .card .sub {
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 11px 12px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      background: #fff;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Live Estimate Box */
+    .estimate-box {
+      background: #ecfdf5;
+      border: 1px dashed var(--primary);
+      padding: 12px;
+      border-radius: 10px;
+      margin: 14px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .estimate-box .label {
+      font-size: 0.82rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+    }
+
+    .estimate-box .price {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .discount-tag {
+      display: block;
+      font-size: 0.72rem;
+      color: #b45309;
+      font-weight: 700;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 6px;
+      box-shadow: 0 4px 10px rgba(27, 122, 61, 0.25);
+    }
+
+    .submit-btn:active {
+      transform: scale(0.99);
+    }
+
+    .submit-btn.pilot-btn {
+      background: #0f172a;
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.2);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <span class="badge">🌾 Fast • Safe • Affordable</span>
+    <h1>AgroWing Drone Services</h1>
+    <p>1 Acre Pesticide Spraying in 10 Minutes | 10 నిమిషాల్లో ఎకరం పిచికారీ</p>
+  </header>
+
+  <div class="container">
+    <!-- Quick Benefits -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <strong>10 Mins</strong>
+        <span>Per Acre</span>
+      </div>
+      <div class="stat-item">
+        <strong>90% Less</strong>
+        <span>Water Used</span>
+      </div>
+      <div class="stat-item">
+        <strong>₹500/Acre</strong>
+        <span>Starting Price</span>
+      </div>
+    </div>
+
+    <!-- Switcher -->
+    <div class="tabs">
+      <button class="tab-btn active" id="tab-farmer" onclick="switchTab('farmer')">
+        🚜 Book Drone (రైతు)
+      </button>
+      <button class="tab-btn" id="tab-pilot" onclick="switchTab('pilot')">
+        🚁 Join as Pilot (డ్రోన్ ఓనర్)
+      </button>
+    </div>
+
+    <!-- FARMER BOOKING FORM -->
+    <div class="card" id="farmer-section">
+      <h2>Book Spraying Drone</h2>
+      <p class="sub">డ్రోన్ బుకింగ్ కోసం మీ వివరాలు నమోదు చేయండి</p>
+
+      <form id="farmerForm" onsubmit="submitFarmer(event)">
+        <div class="form-group">
+          <label>Farmer Name / రైతు పేరు *</label>
+          <input type="text" id="f_name" placeholder="e.g., Ramesh Reddy" required />
+        </div>
+
+        <div class="form-group">
+          <label>Mobile / WhatsApp Number *</label>
+          <input type="tel" id="f_phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" required />
+        </div>
+
+        <div class="form-group">
+          <label>Village & Mandal / గ్రామం & మండలం *</label>
+          <input type="text" id="f_village" placeholder="e.g., Rampally, Keesara" required />
+        </div>
+
+        <div class="form-group">
+          <label>Crop Type / పంట రకం *</label>
+          <select id="f_crop" required>
+            <option value="Paddy (వరి)">Paddy (వరి)</option>
+            <option value="Cotton (పత్తి)">Cotton (పత్తి)</option>
+            <option value="Chilli (మిర్చి)">Chilli (మిర్చి)</option>
+            <option value="Maize (మొక్కజొన్న)">Maize (మొక్కజొన్న)</option>
+            <option value="Vegetables / Other (ఇతర పంటలు)">Vegetables / Other (ఇతర పంటలు)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Total Acres / ఎన్ని ఎకరాలు? *</label>
+          <input type="number" id="f_acres" min="1" max="200" value="2" oninput="calculatePrice()" required />
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Date / ఏ రోజు కావాలి? *</label>
+          <input type="date" id="f_date" required />
+        </div>
+
+        <div class="estimate-box">
+          <div>
+            <span class="label">Estimated Cost (అంచనా ఖర్చు)</span>
+            <span class="discount-tag" id="discount_msg">Book 10+ acres with neighbors for ₹50/acre OFF!</span>
+          </div>
+          <div class="price" id="total_price">₹1,000</div>
+        </div>
+
+        <button type="submit" class="submit-btn">Confirm Booking via WhatsApp ➔</button>
+      </form>
+    </div>
+
+    <!-- DRONE OWNER REGISTRATION FORM -->
+    <div class="card hidden" id="pilot-section">
+      <h2>Register Your Agri-Drone</h2>
+      <p class="sub">Get daily spraying orders in your district with zero upfront fee.</p>
+
+      <form id="pilotForm" onsubmit="submitPilot(event)">
+        <div class="form-group">
+          <label>Owner / Pilot Name *</label>
+          <input type="text" id="p_name" placeholder="Full Name" required />
+        </div>
+
+        <div class="form-group">
+          <label>WhatsApp Number *</label>
+          <input type="tel" id="p_phone" placeholder="10-digit mobile number" pattern="[0-9]{10}" required />
+        </div>
+
+        <div class="form-group">
+          <label>Base District & Mandal *</label>
+          <input type="text" id="p_location" placeholder="e.g., Medchal / Warangal" required />
+        </div>
+
+        <div class="form-group">
+          <label>Service Radius (How far can you travel?) *</label>
+          <select id="p_radius">
+            <option value="Up to 20 km">Up to 20 km</option>
+            <option value="Up to 40 km" selected>Up to 40 km</option>
+            <option value="Up to 75 km">Up to 75 km</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Drone Model & Tank Capacity *</label>
+          <input type="text" id="p_drone" placeholder="e.g., Marut AG365 / 10L Tank" required />
+        </div>
+
+        <div class="form-group">
+          <label>Your Rate per Acre (₹) *</label>
+          <input type="number" id="p_rate" value="450" min="300" max="1000" required />
+        </div>
+
+        <button type="submit" class="submit-btn pilot-btn">Register Drone on WhatsApp ➔</button>
+      </form>
+    </div>
+
+    <p class="footer-note">No advance payment required. Pay only after spraying is completed.</p>
+  </div>
+
+  <script>
+    // 1. REPLACE THIS WITH YOUR WHATSAPP NUMBER (with country code 91, no + sign)
+    const ADMIN_WHATSAPP = "918688593760";
+
+    // Optional: Paste your SheetDB API URL here later if you want automatic Google Sheet logging
+    const SHEETDB_URL = "";
+
+    // Set default date to tomorrow
+    const dateInput = document.getElementById("f_date");
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateInput.value = tomorrow.toISOString().split("T")[0];
+
+    function switchTab(role) {
+      const farmerSec = document.getElementById("farmer-section");
+      const pilotSec = document.getElementById("pilot-section");
+      const tabFarmer = document.getElementById("tab-farmer");
+      const tabPilot = document.getElementById("tab-pilot");
+
+      if (role === "farmer") {
+        farmerSec.classList.remove("hidden");
+        pilotSec.classList.add("hidden");
+        tabFarmer.classList.add("active");
+        tabPilot.classList.remove("active");
+      } else {
+        pilotSec.classList.remove("hidden");
+        farmerSec.classList.add("hidden");
+        tabPilot.classList.add("active");
+        tabFarmer.classList.remove("active");
+      }
+    }
+
+    function calculatePrice() {
+      const acres = parseInt(document.getElementById("f_acres").value) || 0;
+      const discountMsg = document.getElementById("discount_msg");
+      const totalPriceEl = document.getElementById("total_price");
+
+      let rate = 500;
+      if (acres >= 10) {
+        rate = 450;
+        discountMsg.textContent = "🎉 Group Discount Applied: ₹450/acre (Saved ₹" + (acres * 50) + ")";
+        discountMsg.style.color = "#15803d";
+      } else {
+        discountMsg.textContent = "Book 10+ acres with neighbors for ₹50/acre OFF!";
+        discountMsg.style.color = "#b45309";
+      }
+
+      const total = acres * rate;
+      totalPriceEl.textContent = "₹" + total.toLocaleString("en-IN");
+    }
+
+    async function logToSheet(payload) {
+      if (!SHEETDB_URL) return;
+      try {
+        await fetch(SHEETDB_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ data: [payload] })
+        });
+      } catch (err) {
+        console.error("Sheet logging skipped:", err);
+      }
+    }
+
+    async function submitFarmer(e) {
+      e.preventDefault();
+      const name = document.getElementById("f_name").value.trim();
+      const phone = document.getElementById("f_phone").value.trim();
+      const village = document.getElementById("f_village").value.trim();
+      const crop = document.getElementById("f_crop").value;
+      const acres = document.getElementById("f_acres").value;
+      const date = document.getElementById("f_date").value;
+      const total = document.getElementById("total_price").textContent;
+
+      await logToSheet({
+        type: "FARMER_BOOKING",
+        name, phone, village, crop, acres, date, total,
+        timestamp: new Date().toLocaleString()
+      });
+
+      const msg =
+        `🌾 *NEW DRONE BOOKING*%0A` +
+        `------------------------%0A` +
+        `👤 *Farmer:* ${name}%0A` +
+        `📞 *Phone:* ${phone}%0A` +
+        `📍 *Village:* ${village}%0A` +
+        `🌱 *Crop:* ${crop}%0A` +
+        `📐 *Acres:* ${acres} Acres%0A` +
+        `📅 *Date:* ${date}%0A` +
+        `💰 *Est. Total:* ${total}`;
+
+      window.open(`https://wa.me/${ADMIN_WHATSAPP}?text=${msg}`, "_blank");
+    }
+
+    async function submitPilot(e) {
+      e.preventDefault();
+      const name = document.getElementById("p_name").value.trim();
+      const phone = document.getElementById("p_phone").value.trim();
+      const location = document.getElementById("p_location").value.trim();
+      const radius = document.getElementById("p_radius").value;
+      const drone = document.getElementById("p_drone").value.trim();
+      const rate = document.getElementById("p_rate").value;
+
+      await logToSheet({
+        type: "PILOT_REGISTRATION",
+        name, phone, location, radius, drone, rate,
+        timestamp: new Date().toLocaleString()
+      });
+
+      const msg =
+        `🚁 *NEW DRONE PARTNER REGISTRATION*%0A` +
+        `------------------------%0A` +
+        `👤 *Pilot/Owner:* ${name}%0A` +
+        `📞 *Phone:* ${phone}%0A` +
+        `📍 *Base Location:* ${location}%0A` +
+        `🛣️ *Service Radius:* ${radius}%0A` +
+        `🛸 *Drone Model:* ${drone}%0A` +
+        `💵 *Expected Rate:* ₹${rate}/acre`;
+
+      window.open(`https://wa.me/${ADMIN_WHATSAPP}?text=${msg}`, "_blank");
+    }
+  </script>
+</body>
+</html>
